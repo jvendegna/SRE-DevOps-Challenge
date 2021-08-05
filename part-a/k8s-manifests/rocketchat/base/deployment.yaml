@@ -1,0 +1,26 @@
+### RocketChat Deployment Object
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rocketchat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rocketchat
+  template:
+    metadata:
+      labels:
+        app: rocketchat
+    spec:
+      containers:
+        - name: rocketchat
+          image: rocketchat/rocket.chat:3.17
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MONGO_URL
+              value: mongodb://rocketmongo-0.rocketmongo:27017/rocketchat
+            - name: MONGO_OPLOG_URL
+              value: mongodb://rocketmongo-0.rocketmongo:27017/local?replSet=rs0
+          imagePullPolicy: Always

@@ -1,0 +1,9 @@
+commonLabels:
+- app: rocketchat
+coommonAnnotations:
+- note: Rocket Chat
+resources:
+- deployment.yaml
+- service.yaml
+- ingress.yaml
+

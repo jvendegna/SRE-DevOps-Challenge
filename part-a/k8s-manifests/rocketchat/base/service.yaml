@@ -1,0 +1,13 @@
+### RocketChat Service Object
+apiVersion: v1
+kind: Service
+metadata:
+  name: rocketchat-server
+spec:
+  selector:
+    app: rocketchat-server
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+  type: clusterIP

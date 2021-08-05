@@ -1,0 +1,10 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rocketchat
+spec:
+  defaultBackend:
+    service:
+      name: rocketchat
+      port:
+        number: 3000

@@ -1,0 +1,14 @@
+# MongoDB Service object
+apiVersion: v1
+kind: Service
+metadata:
+  name: rocketmongo
+  labels:
+    app: rocketmongo
+spec:
+  selector:
+    app: rocketmongo
+  ports:
+    - port: 27017
+      targetPort: 27017
+  clusterIP: None

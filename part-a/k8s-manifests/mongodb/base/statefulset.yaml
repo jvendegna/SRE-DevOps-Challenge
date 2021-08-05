@@ -1,0 +1,43 @@
+---
+# MongoDB for state storage
+# TODO: 
+# - Terraform instantiate the instances
+# - Terraform Configure the hostname
+# - Terraform Add the other replicas to create a cluser
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rocketchat-backend
+spec:
+  serviceName: rocketchat-backend
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rocketchat-backend
+  template:
+    metadata:
+      labels:
+        app: rocketchat-backend
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: rocketchat-backend
+          image: mongo:4.4.8
+          command:
+          - mongod
+          - "--bind_ip_all"
+          - "--replSet"
+          - rs0
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+          - name: mongo-volume
+            mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-volume
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 5Gi

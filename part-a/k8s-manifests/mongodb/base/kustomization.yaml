@@ -1,0 +1,9 @@
+commonLabels:
+  app: mongo-rc-backend
+resources:
+  - statefulset.yaml
+  - service.yaml
+configMapGenerator:
+  - name: mongo-map
+    files:
+      - env.mongo.txt
